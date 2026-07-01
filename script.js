@@ -1,11 +1,10 @@
 // ===============================
-// LICZNIK CZASU
+// LICZNIK
 // ===============================
 
 const startDate = new Date("2023-06-07T00:00:00");
 
 function updateTimer() {
-
     const now = new Date();
     const diff = now - startDate;
 
@@ -14,8 +13,10 @@ function updateTimer() {
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-    document.getElementById("timer").innerHTML =
-        ${days} dni ${hours} godz. ${minutes} min ${seconds} sek ❤️;
+    const el = document.getElementById("timer");
+    if (el) {
+        el.innerHTML = ${days} dni ${hours} godz ${minutes} min ${seconds} sek ❤️;
+    }
 }
 
 updateTimer();
@@ -23,12 +24,13 @@ setInterval(updateTimer, 1000);
 
 
 // ===============================
-// SERDUSZKA
+// SERCA
 // ===============================
 
 const heartsContainer = document.querySelector(".hearts");
 
 function createHeart() {
+    if (!heartsContainer) return;
 
     const heart = document.createElement("div");
     heart.classList.add("heart");
@@ -40,16 +42,14 @@ function createHeart() {
 
     heartsContainer.appendChild(heart);
 
-    setTimeout(() => {
-        heart.remove();
-    }, 10000);
+    setTimeout(() => heart.remove(), 10000);
 }
 
 setInterval(createHeart, 300);
 
 
 // ===============================
-// LIGHTBOX (klik zdjęć)
+// ZDJĘCIA (LIGHTBOX)
 // ===============================
 
 document.querySelectorAll(".gallery img").forEach(img => {
@@ -57,8 +57,8 @@ document.querySelectorAll(".gallery img").forEach(img => {
 
         const overlay = document.createElement("div");
         overlay.style.position = "fixed";
-        overlay.style.top = "0";
-        overlay.style.left = "0";
+        overlay.style.top = 0;
+        overlay.style.left = 0;
         overlay.style.width = "100%";
         overlay.style.height = "100%";
         overlay.style.background = "rgba(0,0,0,0.😎";
@@ -72,7 +72,6 @@ document.querySelectorAll(".gallery img").forEach(img => {
         bigImg.style.maxWidth = "90%";
         bigImg.style.maxHeight = "90%";
         bigImg.style.borderRadius = "20px";
-        bigImg.style.boxShadow = "0 0 30px pink";
 
         overlay.appendChild(bigImg);
 
